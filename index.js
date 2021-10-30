@@ -48,12 +48,13 @@ async function run() {
             const tour = await toursCollection.findOne(query);
             res.send(tour);
         })
-        // POST API
-        // app.post('/students', async (req, res) => {
-        //     const newStudent = req.body;
-        //     const result = await studentsCollection.insertOne(newStudent);
-        //     res.json(result);
-        // })
+        // POST API ******
+        app.post('/tourcollection', async (req, res) => {
+            const newTour = req.body;
+            const result = await toursCollection.insertOne(newTour);
+            res.json(result);
+        })
+
         app.post('/users', async (req, res) => {
             const newUser = req.body;
             const result = await usersCollection.insertOne(newUser);
@@ -73,28 +74,20 @@ async function run() {
         })
 
         // // UPDATE API
-        // app.put('/students/:id', async (req, res) => {
-        //     const id = req.params.id;
-        //     const updateStudent = req.body;
-        //     const filter = { _id: ObjectId(id) };
-        //     const options = { upset: true };
-        //     const updateDoc = {
-        //         $set: {
-        //             name: updateStudent.name,
-        //             email: updateStudent.email
-        //         },
-        //     }
-        //     const result = await studentsCollection.updateOne(filter, updateDoc, options);
-        //     console.log(result);
-        //     res.json(result);
-        // })
-        // // DELETE API
-        // app.delete('/students/:id', async (req, res) => {
-        //     const id = req.params.id;
-        //     const query = { _id: ObjectId(id) };
-        //     const result = await studentsCollection.deleteOne(query);
-        //     res.json(result);
-        // })
+        app.put('/users/:id', async (req, res) => {
+            const id = req.params.id;
+            const updateUser = req.body;
+            const filter = { _id: ObjectId(id) };
+            const options = { upset: true };
+            const updateDoc = {
+                $set: {
+                    status: updateUser.status
+                },
+            }
+            const result = await usersCollection.updateOne(filter, updateDoc, options);
+            console.log(result);
+            res.json(result);
+        })
     }
     finally {
 
